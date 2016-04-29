@@ -9,20 +9,26 @@ import java.io.PrintWriter;
 
 public class ConsoleWriterDemo {
 
-	public static void main(String[] args) throws IOException {
-		File file = new File("/temp/Textdatei2.txt");
-		FileWriter fr = new FileWriter(file, true); //durch true wird das file nicht überschrieben sondern dazugehängt!
-		PrintWriter pw = new PrintWriter(fr);
+	public static void main(String[] args) {
 		
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		String line;
-		while(!(line = br.readLine()).equals("stop")) {
-			pw.println(line);
+			File file = new File("/temp/Textdatei2.txt");
+
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){
+			FileWriter fr = new FileWriter(file, true); //durch true wird das file nicht überschrieben sondern dazugehängt!
+			PrintWriter pw = new PrintWriter(fr);
+			
+			String line;
+			while(!(line = br.readLine()).equals("stop")) {
+				pw.println(line);
+			}
+			
+			pw.flush();
+			pw.close();
+			
 		}
-		br.close();
-		pw.flush();
-		pw.close();
+		catch(IOException ex) {
+			ex.printStackTrace();
+		}
 
 	}
 
