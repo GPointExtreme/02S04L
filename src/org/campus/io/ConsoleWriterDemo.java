@@ -11,7 +11,7 @@ public class ConsoleWriterDemo {
 
 	public static void main(String[] args) throws IOException {
 		File file = new File("/temp/Textdatei2.txt");
-		FileWriter fr = new FileWriter(file);
+		FileWriter fr = new FileWriter(file, true); //durch true wird das file nicht überschrieben sondern dazugehängt!
 		PrintWriter pw = new PrintWriter(fr);
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -20,6 +20,7 @@ public class ConsoleWriterDemo {
 		while(!(line = br.readLine()).equals("stop")) {
 			pw.println(line);
 		}
+		br.close();
 		pw.flush();
 		pw.close();
 
